@@ -1,0 +1,172 @@
+@charset "utf-8";
+
+/* 초기화 */
+html {overflow-y:scroll;font-family: "Work Sans", Arial, sans-serif;}
+body {margin:0;padding:0;font-size:13px;font-family: "Work Sans", Arial, sans-serif;cursor:default;word-break: keep-all;}
+html, h1, h2, h3, h4, h5, h6, form, fieldset, img {margin:0;padding:0;border:0}
+h1, h2, h3, h4, h5, h6 {font-size:1em;font-family: "Work Sans", Arial, sans-serif;}
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {display:block}
+li{list-style:none}
+ul,li{margin:0;padding:0}
+#hd ul, nav ul, #ft ul {margin:0;padding:0;list-style:none}
+legend {position:absolute;margin:0;padding:0;font-size:0;line-height:0;text-indent:-9999em;overflow:hidden}
+label, input, button, select, img {vertical-align:middle}
+input, button {margin:0;padding:0;font-family: "Work Sans", Arial, sans-serif;font-size:1em}
+button {cursor:pointer}
+address{font-style: normal;}
+
+textarea, select {font-family:'Malgun Gothic', dotum, sans-serif;font-size:1em}
+select {margin:0}
+p {margin:0;padding:0;word-break:break-all}
+hr {display:none}
+pre {overflow-x:scroll;font-size:1.1em}
+a {color:#000;text-decoration:none}
+
+*, :after, :before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+
+#contents_wrap {
+    width: 100%;
+    max-width: 1000px;
+    display: block;
+    margin: 0 auto;
+    padding: 0;
+    box-shadow: 0px 0px 20px #848484;
+}
+
+#contents_wrap img {
+    display: block;
+}
+
+#contents_wrap .btn_half{display: inline-block;width: 50%;}
+
+#footer {text-align:center;background:#000}
+#footer .footer_inner {color: #fff;font-size: 16px;line-height: 26px;padding: 5% 3% 3%;}
+
+
+
+
+
+.width_100p{width:100%}
+.display_inline_block{display:inline-block}
+.display_none{display:none}
+
+.main--section{
+    position: relative;
+}
+.main_btn{
+    position: absolute;
+    width: 100%;
+    height: 19%;
+    display: flex;
+    bottom: 0;
+}
+
+.main--section .main_btn{
+    height: 19%;
+}
+.main_btn a{
+    display: block;
+    width: 50%;
+    height: 100%;
+}
+
+.f-section{
+    position: relative;
+}
+
+.shu--section{
+    position: relative;
+}
+
+
+#footer {
+    text-align: center;
+    background: #8CD1EA;
+}
+
+#footer .footer_inner {
+    color: #8CD1EA;
+    font-size: 16px;
+    line-height: 26px;
+    padding: 5% 3% 12%;
+}
+
+.bottom--fixed{
+    position: fixed;
+    display: flex;
+    bottom: 0;
+    width: 100%;
+    height: 8%;
+}
+.bottom--fixed a{
+    display: block;
+    text-align: center;
+    width: 50%;
+    height: 100%;
+}
+
+.bottom--fixed a > div{
+    margin-top: 30px;
+}
+
+.bottom--fixed a img{
+    width: 2em;
+    margin-right: 8px;
+}
+
+
+.tell{
+    background: #0d68bd;
+    color: #fff;
+}
+.talk{
+    background: #ffd614;
+}
+
+.popup-area {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    width: 30%;
+    text-align: center;
+    color: #fff;
+    margin: 0 auto;
+    background-color: #293d80;
+    border: 2px solid #ffd75d;
+    box-sizing: border-box;
+
+}
+.popup-body {
+    position: relative;
+    padding: 1.5em;
+}
+.popup-body h2 {
+    font-size: 1.5em;
+    color: #ffd75d;
+}
+.popup-body h4 {
+    font-size: 1.25em;
+    margin: 1.5em 0;
+}
+.popup-body p {
+    margin-bottom: 1.5em
+    
+}
+.popup-body button{
+    position: absolute;
+    top: 1.5em;
+    right: 1.5em;
+    width: 1.5em;
+    height: 1.5em;
+    border: none;
+    background: url(../images/close.png)no-repeat center;
+    background-size: 1.5em 1.5em;
+}
+
