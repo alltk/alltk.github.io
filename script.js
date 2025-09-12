@@ -33,6 +33,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // ABOUT 버튼 이벤트 설정
     setupAboutButton();
+    
+    // 드롭다운 메뉴 설정
+    setupDropdownMenu();
 });
 
 // 스무스 스크롤링 설정
@@ -488,6 +491,49 @@ function setupAboutButton() {
             window.location.href = 'company.html';
         });
     }
+}
+
+// 드롭다운 메뉴 설정
+function setupDropdownMenu() {
+    const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+    
+    dropdownToggles.forEach(toggle => {
+        toggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const dropdown = this.closest('.dropdown');
+            const isActive = dropdown.classList.contains('active');
+            
+            // 다른 드롭다운 닫기
+            document.querySelectorAll('.dropdown').forEach(drop => {
+                drop.classList.remove('active');
+            });
+            
+            // 현재 드롭다운 토글
+            if (!isActive) {
+                dropdown.classList.add('active');
+            }
+        });
+    });
+    
+    // 외부 클릭 시 드롭다운 닫기
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.dropdown')) {
+            document.querySelectorAll('.dropdown').forEach(dropdown => {
+                dropdown.classList.remove('active');
+            });
+        }
+    });
+    
+    // 모바일에서 드롭다운 메뉴 아이템 클릭 시 닫기
+    const dropdownItems = document.querySelectorAll('.dropdown-menu a');
+    dropdownItems.forEach(item => {
+        item.addEventListener('click', function() {
+            document.querySelectorAll('.dropdown').forEach(dropdown => {
+                dropdown.classList.remove('active');
+            });
+        });
+    });
 }
 
 // 슬라이드 수량 동적 업데이트 함수 (나중에 사용)

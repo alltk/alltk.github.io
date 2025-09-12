@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>언론보도 및 수상 - 브랜드누누</title>
+    <meta name="description" content="브랜드누누의 언론보도자료와 수상 내역을 확인하세요. 디지털 마케팅 분야에서의 성과와 인정받은 전문성을 확인할 수 있습니다.">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- 헤더 -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="img/logo.png" alt="브랜드누누" class="logo-image">
+                    </a>
+                </div>
+                
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="company.html">회사소개</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle">마케팅서비스 <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="seo-optimization.html">SEO최적화</a></li>
+                                <li><a href="traffic-marketing.html">트래픽유입활성화</a></li>
+                                <li><a href="blog-marketing.html">블로그마케팅</a></li>
+                                <li><a href="sns-marketing.html">SNS인스타그램마케팅</a></li>
+                                <li><a href="video-production.html">홍보영상제작</a></li>
+                                <li><a href="management-team.html">전문관리팀배치</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="product.html">상품안내</a></li>
+                        <li><a href="press.html" class="active">언론보도 및 수상</a></li>
+                    </ul>
+                    <a href="#contact" class="quote-btn">견적문의</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- 페이지 히어로 섹션 -->
+    <section class="page-hero">
+        <div class="container">
+            <h2>언론보도 및 수상</h2>
+            <p>브랜드누누의 성과와 인정받은 전문성을 확인하세요</p>
+        </div>
+    </section>
+
+    <!-- 언론보도 섹션 -->
+    <section class="press-release">
+        <div class="container">
+            <div class="section-header">
+                <h3>언론보도</h3>
+                <p>주요 언론에서 보도한 브랜드누누의 성과와 전문성</p>
+            </div>
+            
+            <div class="press-slider">
+                <div class="press-slide active">
+                    <img src="img/pressrelease_01.png" alt="언론보도 1" class="press-image">
+                </div>
+                <div class="press-slide">
+                    <img src="img/pressrelease_02.png" alt="언론보도 2" class="press-image">
+                </div>
+                <div class="press-slide">
+                    <img src="img/pressrelease_03.png" alt="언론보도 3" class="press-image">
+                </div>
+            </div>
+            
+            <div class="slider-nav">
+                <button class="nav-btn" onclick="changePressSlide(-1)">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <div class="slider-dots">
+                    <span class="dot active" onclick="currentPressSlide(1)"></span>
+                    <span class="dot" onclick="currentPressSlide(2)"></span>
+                    <span class="dot" onclick="currentPressSlide(3)"></span>
+                </div>
+                <button class="nav-btn" onclick="changePressSlide(1)">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 수상 내역 섹션 -->
+    <section class="awards-section">
+        <div class="container">
+            <div class="section-header">
+                <h3>수상 내역</h3>
+                <p>디지털 마케팅 분야에서 인정받은 브랜드누누의 전문성</p>
+            </div>
+            
+            <div class="awards-grid">
+                <div class="award-card">
+                    <div class="award-year">2024</div>
+                    <div class="award-content">
+                        <h4>대한민국 디지털 마케팅 대상</h4>
+                        <p class="award-category">최우수 SEO 서비스 부문</p>
+                        <p class="award-description">고객 만족도와 성과 지표에서 최고 점수를 받아 수상</p>
+                    </div>
+                    <div class="award-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                </div>
+
+                <div class="award-card">
+                    <div class="award-year">2023</div>
+                    <div class="award-content">
+                        <h4>한국마케팅협회 우수기업상</h4>
+                        <p class="award-category">혁신 마케팅 솔루션 부문</p>
+                        <p class="award-description">창의적인 마케팅 전략과 뛰어난 성과로 선정</p>
+                    </div>
+                    <div class="award-icon">
+                        <i class="fas fa-medal"></i>
+                    </div>
+                </div>
+
+                <div class="award-card">
+                    <div class="award-year">2023</div>
+                    <div class="award-content">
+                        <h4>소상공인진흥공단 인증</h4>
+                        <p class="award-category">우수 마케팅 지원 기업</p>
+                        <p class="award-description">소상공인 지원 프로그램에서 우수한 성과 달성</p>
+                    </div>
+                    <div class="award-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                </div>
+
+                <div class="award-card">
+                    <div class="award-year">2022</div>
+                    <div class="award-content">
+                        <h4>한국인터넷광고협회 수상</h4>
+                        <p class="award-category">최우수 디지털 광고 대행사</p>
+                        <p class="award-description">혁신적인 광고 전략과 뛰어난 성과로 수상</p>
+                    </div>
+                    <div class="award-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+
+                <div class="award-card">
+                    <div class="award-year">2022</div>
+                    <div class="award-content">
+                        <h4>서울시 스타트업 인증</h4>
+                        <p class="award-category">혁신 기업 인증</p>
+                        <p class="award-description">창의적인 비즈니스 모델과 성장성 인정</p>
+                    </div>
+                    <div class="award-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                </div>
+
+                <div class="award-card">
+                    <div class="award-year">2021</div>
+                    <div class="award-content">
+                        <h4>한국경영자총협회 표창</h4>
+                        <p class="award-category">우수 중소기업 부문</p>
+                        <p class="award-description">지속적인 성장과 혁신으로 인정받음</p>
+                    </div>
+                    <div class="award-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 고객 성과 섹션 -->
+    <section class="client-results">
+        <div class="container">
+            <div class="section-header">
+                <h3>고객 성과</h3>
+                <p>브랜드누누와 함께한 고객들의 놀라운 성과</p>
+            </div>
+            
+            <div class="results-grid">
+                <div class="result-item">
+                    <div class="result-number">300%</div>
+                    <div class="result-label">평균 트래픽 증가율</div>
+                    <div class="result-description">6개월 내 고객사 웹사이트 트래픽 평균 증가율</div>
+                </div>
+                
+                <div class="result-item">
+                    <div class="result-number">150%</div>
+                    <div class="result-label">전환율 향상</div>
+                    <div class="result-description">SEO 최적화를 통한 평균 전환율 개선</div>
+                </div>
+                
+                <div class="result-item">
+                    <div class="result-number">500+</div>
+                    <div class="result-label">성공 사례</div>
+                    <div class="result-description">지금까지 함께한 고객사의 성공 사례</div>
+                </div>
+                
+                <div class="result-item">
+                    <div class="result-number">95%</div>
+                    <div class="result-label">고객 만족도</div>
+                    <div class="result-description">서비스 만족도 조사 결과</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 인증서 섹션 -->
+    <section class="certifications">
+        <div class="container">
+            <div class="section-header">
+                <h3>인증서 및 자격</h3>
+                <p>브랜드누누의 전문성을 보증하는 인증서들</p>
+            </div>
+            
+            <div class="cert-grid">
+                <div class="cert-item">
+                    <div class="cert-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h4>ISO 27001 인증</h4>
+                    <p>정보보안 관리시스템 국제 표준 인증</p>
+                </div>
+                
+                <div class="cert-item">
+                    <div class="cert-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h4>개인정보보호 인증</h4>
+                    <p>개인정보보호법 준수 인증서</p>
+                </div>
+                
+                <div class="cert-item">
+                    <div class="cert-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h4>Google 파트너 인증</h4>
+                    <p>구글 공식 파트너 인증</p>
+                </div>
+                
+                <div class="cert-item">
+                    <div class="cert-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <h4>Facebook 마케팅 파트너</h4>
+                    <p>페이스북 공식 마케팅 파트너 인증</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 문의하기 섹션 -->
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <h3>문의하기</h3>
+            <p>브랜드누누와 함께 성장하세요</p>
+            <div class="contact-content">
+                <div class="kakao-contact">
+                    <h4>바로 문의하기</h4>
+                    <div class="contact-buttons">
+                        <a href="http://pf.kakao.com/_YxlXDn" target="_blank" class="contact-btn kakao-btn">
+                            <i class="fas fa-comment"></i>
+                            <span>카카오톡 문의</span>
+                        </a>
+                        <a href="tel: 010-2048-7706" class="contact-btn phone-btn">
+                            <i class="fas fa-phone"></i>
+                            <span>전화 문의</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form>
+                        <div class="form-group">
+                            <input type="text" placeholder="이름" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" placeholder="연락처" required>
+                        </div>
+                        <div class="form-group checkbox-group">
+                            <label style="color: #fff;">
+                                <input type="checkbox" required>
+                                <span style="color: #fff;">개인정보활용동의</span>
+                                <button type="button" 
+                                        onclick="openModal('privacyModal')" 
+                                        style="margin-left:8px; background:transparent; border:none; color:#ffd700; cursor:pointer; font-size:0.95em; vertical-align:middle;">
+                                    더보기
+                                </button>
+                            </label>
+                        </div>
+                        <button type="submit" class="submit-btn">문의하기</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 푸터 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="company-info">
+                    <p>상호 : 브랜드누누</p>
+                    <p>광고주의 성장이 곧 우리의 성장</p>
+                </div>
+                <nav class="footer-nav">
+                    <ul>
+                        <li><a href="company.html">회사소개</a></li>
+                        <li><a href="product.html">상품안내</a></li>
+                        <li><a href="press.html">언론보도</a></li>
+                        <li><a href="#contact">문의하기</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-links">
+                    <a href="#" onclick="openModal('privacyModal')">개인정보처리방침</a>
+                    <span>|</span>
+                    <a href="#" onclick="openModal('termsModal')">이용약관</a>
+                </div>
+                <p>대표자 : 최정인</p>
+                <p>사업자등록번호 : 208-08-97217</p>
+                <p>주소 : 경기도 시흥시 서울대학로77, 616호</p>
+                <p>대표전화 : 010-2048-7706</p>
+                <p>이메일 : cji.brandnunu@gmail.com</p>
+                <p>COPYRIGHTⓒ 2025 브랜드누누 ALL RIGHTS RESERVED.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 모달 컨테이너 -->
+    <div id="modals-container"></div>
+
+    <!-- 고정 플로팅 버튼 -->
+    <div class="floating-buttons">
+        <a href="http://pf.kakao.com/_YxlXDn" target="_blank" class="floating-btn kakao-float" title="카카오톡 문의">
+            <i class="fas fa-comment"></i>
+            <span class="btn-text">카톡</span>
+        </a>
+        <a href="tel: 010-2048-7706" class="floating-btn phone-float" title="전화 문의">
+            <i class="fas fa-phone"></i>
+            <span class="btn-text">전화</span>
+        </a>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

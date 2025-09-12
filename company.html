@@ -12,26 +12,33 @@
     <!-- 헤더 -->
     <header class="header">
         <div class="container">
-            <div class="header-top">
+            <div class="header-content">
                 <div class="logo">
                     <a href="index.html">
                         <img src="img/logo.png" alt="브랜드누누" class="logo-image">
                     </a>
                 </div>
-            </div>
-            
-            <nav class="main-nav">
+                
+                <nav class="main-nav">
                 <ul>
-                    <li><a href="company.html">회사소개</a></li>
-                    <li><a href="seo-optimization.html">SEO최적화</a></li>
-                    <li><a href="traffic-marketing.html">트래픽유입활성화</a></li>
-                    <li><a href="blog-marketing.html">블로그마케팅</a></li>
-                    <li><a href="sns-marketing.html">SNS인스타그램마케팅</a></li>
-                    <li><a href="video-production.html">홍보영상제작</a></li>
-                    <li><a href="management-team.html">전문관리팀배치</a></li>
+                    <li><a href="company.html" class="active">회사소개</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle">마케팅서비스 <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="seo-optimization.html">SEO최적화</a></li>
+                            <li><a href="traffic-marketing.html">트래픽유입활성화</a></li>
+                            <li><a href="blog-marketing.html">블로그마케팅</a></li>
+                            <li><a href="sns-marketing.html">SNS인스타그램마케팅</a></li>
+                            <li><a href="video-production.html">홍보영상제작</a></li>
+                            <li><a href="management-team.html">전문관리팀배치</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="product.html">상품안내</a></li>
+                    <li><a href="press.html">언론보도 및 수상</a></li>
                 </ul>
-                <button class="quote-btn">견적문의</button>
-            </nav>
+                <a href="#contact" class="quote-btn">견적문의</a>
+                </nav>
+            </div>
         </div>
     </header>
 
@@ -156,24 +163,29 @@
             <!-- 상품안내이미지 삽입 영역 -->
             <div class="product-gallery">
                 <div class="product-placeholder">
-                    <i class="fas fa-image"></i>
-                    <p>상품안내이미지가 여기에 삽입됩니다</p>
+                    <img src="img/Productinformation.png" alt="상품안내" class="product-image">
                 </div>
             </div>
         </div>
     </section>
 
     <!-- 문의하기 섹션 -->
-    <section class="contact-section">
+    <section class="contact-section" id="contact">
         <div class="container">
             <h3>문의하기</h3>
             <p>브랜드누누와 함께 성장하세요</p>
             <div class="contact-content">
                 <div class="kakao-contact">
-                    <h4>카카오톡 문의</h4>
-                    <div class="qr-code">
-                        <i class="fas fa-qrcode"></i>
-                        <p>QR코드 연동</p>
+                    <h4>바로 문의하기</h4>
+                    <div class="contact-buttons">
+                        <a href="http://pf.kakao.com/_YxlXDn" target="_blank" class="contact-btn kakao-btn">
+                            <i class="fas fa-comment"></i>
+                            <span>카카오톡 문의</span>
+                        </a>
+                        <a href="tel: 010-2048-7706" class="contact-btn phone-btn">
+                            <i class="fas fa-phone"></i>
+                            <span>전화 문의</span>
+                        </a>
                     </div>
                 </div>
                 <div class="contact-form">
@@ -185,9 +197,14 @@
                             <input type="tel" placeholder="연락처" required>
                         </div>
                         <div class="form-group checkbox-group">
-                            <label>
+                            <label style="color: #fff;">
                                 <input type="checkbox" required>
-                                <span>개인정보활용동의 (무료버전)</span>
+                                <span style="color: #fff;">개인정보활용동의</span>
+                                <button type="button" 
+                                        onclick="openModal('privacyModal')" 
+                                        style="margin-left:8px; background:transparent; border:none; color:#ffd700; cursor:pointer; font-size:0.95em; vertical-align:middle;">
+                                    더보기
+                                </button>
                             </label>
                         </div>
                         <button type="submit" class="submit-btn">문의하기</button>
@@ -220,12 +237,9 @@
                 <nav class="footer-nav">
                     <ul>
                         <li><a href="company.html">회사소개</a></li>
-                        <li><a href="seo-optimization.html">SEO최적화</a></li>
-                        <li><a href="traffic-marketing.html">트래픽유입활성화</a></li>
-                        <li><a href="blog-marketing.html">블로그마케팅</a></li>
-                        <li><a href="sns-marketing.html">SNS인스타그램마케팅</a></li>
-                        <li><a href="video-production.html">홍보영상제작</a></li>
-                        <li><a href="management-team.html">전문관리팀배치</a></li>
+                        <li><a href="product.html">상품안내</a></li>
+                        <li><a href="press.html">언론보도</a></li>
+                        <li><a href="#contact">문의하기</a></li>
                     </ul>
                 </nav>
             </div>
@@ -236,13 +250,30 @@
                     <span>|</span>
                     <a href="#" onclick="openModal('termsModal')">이용약관</a>
                 </div>
-                <p>COPYRIGHTⓒ 브랜드누누 ALL RIGHTS RESERVED.</p>
+                <p>대표자 : 최정인</p>
+                <p>사업자등록번호 : 208-08-97217</p>
+                <p>주소 : 경기도 시흥시 서울대학로77, 616호</p>
+                <p>대표전화 : 010-2048-7706</p>
+                <p>이메일 : cji.brandnunu@gmail.com</p>
+                <p>COPYRIGHTⓒ 2025 브랜드누누 ALL RIGHTS RESERVED.</p>
             </div>
         </div>
     </footer>
 
     <!-- 모달들 -->
     <div id="modals-container"></div>
+
+    <!-- 고정 플로팅 버튼 -->
+    <div class="floating-buttons">
+        <a href="http://pf.kakao.com/_YxlXDn" target="_blank" class="floating-btn kakao-float" title="카카오톡 문의">
+            <i class="fas fa-comment"></i>
+            <span class="btn-text">카톡</span>
+        </a>
+        <a href="tel: 010-2048-7706" class="floating-btn phone-float" title="전화 문의">
+            <i class="fas fa-phone"></i>
+            <span class="btn-text">전화</span>
+        </a>
+    </div>
 
     <script src="script.js"></script>
 </body>
