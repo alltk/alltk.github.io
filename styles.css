@@ -1659,11 +1659,8 @@ body {
     }
     
     .main-nav.mobile-open .quote-btn {
-        position: absolute;
-        bottom: 500px;
-        left: 30px;
-        right: 30px;
-        width: auto;
+        margin: 15px 0 0 0 !important;
+        width: 100%;
         text-align: center;
         padding: 15px 20px;
         border-radius: 8px;
@@ -1674,7 +1671,7 @@ body {
         border: none;
         box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
         transition: all 0.3s ease;
-        margin-top: 0;
+        display: block;
     }
     
     .main-nav.mobile-open .quote-btn:hover {
@@ -1682,6 +1679,7 @@ body {
         transform: translateY(-2px);
         box-shadow: 0 6px 16px rgba(255, 215, 0, 0.4);
     }
+    
     
     /* 모바일 메뉴 오버레이 */
     .mobile-menu-overlay {
