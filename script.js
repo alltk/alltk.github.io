@@ -36,6 +36,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // 드롭다운 메뉴 설정
     setupDropdownMenu();
+    
+    // 모바일 메뉴 설정
+    setupMobileMenu();
 });
 
 // 스무스 스크롤링 설정
@@ -671,3 +674,90 @@ style.textContent = `
     }
 `;
 document.head.appendChild(style);
+
+// 모바일 메뉴 설정
+function setupMobileMenu() {
+    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+    const mainNav = document.querySelector('.main-nav');
+    
+    if (!mobileMenuToggle || !mainNav) return;
+    
+    // 모바일 메뉴 오버레이 생성
+    const overlay = document.createElement('div');
+    overlay.className = 'mobile-menu-overlay';
+    document.body.appendChild(overlay);
+    
+    // 햄버거 메뉴 토글
+    mobileMenuToggle.addEventListener('click', function() {
+        const isOpen = mainNav.classList.contains('mobile-open');
+        
+        if (isOpen) {
+            // 메뉴 닫기
+            closeMobileMenu();
+        } else {
+            // 메뉴 열기
+            openMobileMenu();
+        }
+    });
+    
+    // 오버레이 클릭 시 메뉴 닫기
+    overlay.addEventListener('click', function() {
+        closeMobileMenu();
+    });
+    
+    // 메뉴 아이템 클릭 시 메뉴 닫기 (드롭다운 토글 제외)
+    const menuItems = mainNav.querySelectorAll('a:not(.dropdown-toggle)');
+    menuItems.forEach(item => {
+        item.addEventListener('click', function() {
+            if (window.innerWidth <= 768) {
+                closeMobileMenu();
+            }
+        });
+    });
+    
+    // 드롭다운 토글 기능
+    const dropdownToggles = mainNav.querySelectorAll('.dropdown-toggle');
+    dropdownToggles.forEach(toggle => {
+        toggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            const dropdown = this.parentElement;
+            const isActive = dropdown.classList.contains('active');
+            
+            // 다른 드롭다운 닫기
+            document.querySelectorAll('.dropdown').forEach(dd => {
+                if (dd !== dropdown) {
+                    dd.classList.remove('active');
+                }
+            });
+            
+            // 현재 드롭다운 토글
+            if (isActive) {
+                dropdown.classList.remove('active');
+            } else {
+                dropdown.classList.add('active');
+            }
+        });
+    });
+    
+    // 화면 크기 변경 시 메뉴 상태 초기화
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 768) {
+            closeMobileMenu();
+        }
+    });
+    
+    function openMobileMenu() {
+        mainNav.classList.add('mobile-open');
+        mainNav.classList.add('active');
+        overlay.classList.add('active');
+        mobileMenuToggle.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+    
+    function closeMobileMenu() {
+        mainNav.classList.remove('mobile-open', 'active');
+        overlay.classList.remove('active');
+        mobileMenuToggle.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+}

@@ -30,9 +30,18 @@ body {
 
 .header-content {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     padding: 15px 0;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    position: relative;
+}
+
+.logo {
+    position: absolute;
+    left: 0;
 }
 
 .logo h1 {
@@ -42,7 +51,7 @@ body {
 }
 
 .logo-image {
-    height: 50px;
+    height: 90px;
     width: auto;
     transition: transform 0.3s ease;
 }
@@ -62,6 +71,8 @@ body {
     display: flex;
     list-style: none;
     gap: 30px;
+    justify-content: center;
+    align-items: center;
 }
 
 .main-nav a {
@@ -1345,10 +1356,17 @@ body {
     opacity: 0.8;
 }
 
+.footer-nav {
+    display: flex;
+    justify-content: center;
+}
+
 .footer-nav ul {
     display: flex;
     list-style: none;
     gap: 20px;
+    justify-content: center;
+    align-items: center;
 }
 
 .footer-nav a {
@@ -1461,13 +1479,58 @@ body {
 }
 
 /* 반응형 디자인 */
+/* 햄버거 메뉴 버튼 */
+.mobile-menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 30px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1001;
+}
+
+.mobile-menu-toggle span {
+    width: 100%;
+    height: 3px;
+    background: #000;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    transform-origin: center;
+}
+
+.mobile-menu-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+}
+
+.mobile-menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.mobile-menu-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+}
+
 @media (max-width: 768px) {
     .container {
         padding: 0 15px;
     }
     
+    .header {
+        padding: 0px 0;
+    }
+    
     .logo-image {
-        height: 40px;
+        height: 150px;
+        max-width: 100%;
+    }
+    
+    /* 햄버거 메뉴 버튼 표시 */
+    .mobile-menu-toggle {
+        display: flex;
     }
     
     .hero-title {
@@ -1480,13 +1543,160 @@ body {
     }
     
     .header-content {
-        flex-direction: column;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
         gap: 20px;
+        position: relative;
+        padding: 20px 0;
+        min-height: 100px;
     }
     
+    .mobile-menu-toggle {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    
+    /* 모바일에서 메인 네비게이션 숨김 */
     .main-nav {
+        display: none;
+    }
+    
+    /* 모바일 메뉴가 열렸을 때 */
+    .main-nav.mobile-open {
+        display: block;
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 80%;
+        max-width: 300px;
+        height: 100vh;
+        background: #fff;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        padding: 80px 30px 30px;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+    }
+    
+    .main-nav.mobile-open.active {
+        transform: translateX(0);
+    }
+    
+    .main-nav.mobile-open ul {
         flex-direction: column;
-        gap: 20px;
+        gap: 15px;
+        align-items: flex-start;
+        width: 100%;
+    }
+    
+    .main-nav.mobile-open li {
+        width: 100%;
+    }
+    
+    .main-nav.mobile-open li a {
+        display: block;
+        padding: 12px 0;
+        width: 100%;
+        border-bottom: 1px solid #f0f0f0;
+    }
+    
+    .main-nav.mobile-open .dropdown {
+        position: relative;
+    }
+    
+    .main-nav.mobile-open .dropdown-toggle {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 0;
+        width: 100%;
+        border-bottom: 1px solid #f0f0f0;
+    }
+    
+    .main-nav.mobile-open .dropdown-menu {
+        position: static;
+        display: none;
+        background: #f8f9fa;
+        box-shadow: none;
+        border-radius: 0;
+        padding: 0;
+        margin-top: 0;
+        width: 100%;
+        max-height: none;
+        overflow: visible;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        transition: none;
+    }
+    
+    .main-nav.mobile-open .dropdown.active .dropdown-menu {
+        display: block;
+        max-height: none;
+        overflow: visible;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+    }
+    
+    .main-nav.mobile-open .dropdown-menu li {
+        border-bottom: none;
+    }
+    
+    .main-nav.mobile-open .dropdown-menu a {
+        padding: 10px 20px;
+        font-size: 14px;
+        color: #666;
+        border-bottom: none;
+    }
+    
+    .main-nav.mobile-open .dropdown-menu a:hover {
+        background: #e9ecef;
+        color: #333;
+    }
+    
+    .main-nav.mobile-open .quote-btn {
+        position: absolute;
+        bottom: 500px;
+        left: 30px;
+        right: 30px;
+        width: auto;
+        text-align: center;
+        padding: 15px 20px;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 600;
+        background: #ffd700;
+        color: #333;
+        border: none;
+        box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+        transition: all 0.3s ease;
+        margin-top: 0;
+    }
+    
+    .main-nav.mobile-open .quote-btn:hover {
+        background: #ffed4e;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(255, 215, 0, 0.4);
+    }
+    
+    /* 모바일 메뉴 오버레이 */
+    .mobile-menu-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+    }
+    
+    .mobile-menu-overlay.active {
+        display: block;
     }
     
     .main-nav ul {
@@ -1498,27 +1708,44 @@ body {
     /* 모바일 드롭다운 */
     .dropdown-menu {
         position: static;
-        opacity: 1;
-        visibility: visible;
-        transform: none;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
         box-shadow: none;
         border: none;
         background: #f8f9fa;
         margin-top: 10px;
         border-radius: 5px;
         display: none;
+        transition: all 0.3s ease;
     }
     
     .dropdown.active .dropdown-menu {
         display: block;
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
     }
     
     .dropdown-toggle i {
         transform: rotate(0deg);
+        transition: transform 0.3s ease;
     }
     
     .dropdown.active .dropdown-toggle i {
         transform: rotate(180deg);
+    }
+    
+    /* 모바일에서 드롭다운 기본 상태는 숨김 */
+    .dropdown-menu {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
+    }
+    
+    .dropdown.active .dropdown-menu {
+        max-height: 300px;
+        overflow: visible;
     }
     
     .footer-content {
