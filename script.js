@@ -40,9 +40,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // 드롭다운 메뉴 설정
     setupDropdownMenu();
     
-    // 모바일 메뉴 설정
-    setupMobileMenu();
-    
     // 팝업 초기화
     initializePopups();
     
@@ -183,22 +180,85 @@ function setupAnimations() {
 // 모달 열기
 function openModal(modalId) {
     const modal = document.getElementById(modalId);
-    modal.style.display = 'block';
-    document.body.style.overflow = 'hidden'; // 배경 스크롤 방지
-    
-    // 모달 내용의 스크롤 위치를 맨 위로 초기화
-    const modalBody = modal.querySelector('.modal-body');
-    if (modalBody) {
-        modalBody.scrollTop = 0;
+    if (modal) {
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden'; // 배경 스크롤 방지
+        
+        // 모달 내용의 스크롤 위치를 맨 위로 초기화
+        const modalBody = modal.querySelector('.modal-body');
+        if (modalBody) {
+            modalBody.scrollTop = 0;
+        }
+    } else {
+        console.log('모달을 찾을 수 없습니다:', modalId);
     }
 }
 
 // 모달 닫기
 function closeModal(modalId) {
     const modal = document.getElementById(modalId);
-    modal.style.display = 'none';
-    document.body.style.overflow = 'auto'; // 배경 스크롤 복원
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto'; // 배경 스크롤 복원
+    }
 }
+
+// 전역 함수로 등록
+window.openModal = openModal;
+window.closeModal = closeModal;
+
+// 즉시 실행 함수로 전역 등록
+(function() {
+    window.openModal = function(modalId) {
+        console.log('openModal 호출됨:', modalId);
+        const modal = document.getElementById(modalId);
+        if (modal) {
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            console.log('모달 열림:', modalId);
+        } else {
+            console.log('모달을 찾을 수 없습니다:', modalId);
+        }
+    };
+    
+    window.closeModal = function(modalId) {
+        console.log('closeModal 호출됨:', modalId);
+        const modal = document.getElementById(modalId);
+        if (modal) {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+            console.log('모달 닫힘:', modalId);
+        }
+    };
+    
+    console.log('모달 함수들이 전역에 등록되었습니다');
+    
+    // 테스트 함수들
+    window.testModal = function() {
+        console.log('모달 테스트 시작');
+        const modal = document.getElementById('privacyModal');
+        if (modal) {
+            console.log('privacyModal 찾음');
+            modal.style.display = 'block';
+        } else {
+            console.log('privacyModal을 찾을 수 없음');
+        }
+    };
+    
+    window.testMobileMenu = function() {
+        console.log('모바일 메뉴 테스트 시작');
+        const toggle = document.getElementById('mobileMenuToggle');
+        const nav = document.querySelector('.main-nav');
+        if (toggle && nav) {
+            console.log('모바일 메뉴 요소들 찾음');
+            toggle.click();
+        } else {
+            console.log('모바일 메뉴 요소들을 찾을 수 없음');
+        }
+    };
+    
+    console.log('테스트 함수들 등록됨: testModal(), testMobileMenu()');
+})();
 
 // 폼 제출 처리
 function submitForm(event) {
@@ -707,8 +767,13 @@ function setupMobileMenu() {
     document.body.appendChild(overlay);
     
     // 햄버거 메뉴 토글
-    mobileMenuToggle.addEventListener('click', function() {
+    mobileMenuToggle.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log('모바일 메뉴 버튼 클릭됨');
+        
         const isOpen = mainNav.classList.contains('mobile-open');
+        console.log('현재 메뉴 상태:', isOpen ? '열림' : '닫힘');
         
         if (isOpen) {
             // 메뉴 닫기
@@ -766,6 +831,7 @@ function setupMobileMenu() {
     });
     
     function openMobileMenu() {
+        console.log('모바일 메뉴 열기');
         mainNav.classList.add('mobile-open');
         mainNav.classList.add('active');
         overlay.classList.add('active');
@@ -774,11 +840,16 @@ function setupMobileMenu() {
     }
     
     function closeMobileMenu() {
+        console.log('모바일 메뉴 닫기');
         mainNav.classList.remove('mobile-open', 'active');
         overlay.classList.remove('active');
         mobileMenuToggle.classList.remove('active');
         document.body.style.overflow = '';
     }
+    
+    // 전역 함수로 등록
+    window.openMobileMenu = openMobileMenu;
+    window.closeMobileMenu = closeMobileMenu;
 }
 
 // 수상 이미지 슬라이드 기능
@@ -1343,6 +1414,56 @@ function closeAllPopups() {
     console.log('모든 팝업이 닫혔습니다!');
 }
 
+// 현재 페이지 메뉴 활성화 함수
+function setActiveMenu() {
+    const currentPage = window.location.pathname;
+    const mainNav = document.querySelector('.main-nav');
+    
+    if (mainNav) {
+        // 모든 메뉴에서 active 클래스 제거
+        const allLinks = mainNav.querySelectorAll('a');
+        allLinks.forEach(link => link.classList.remove('active'));
+        
+        // 현재 페이지에 해당하는 메뉴 활성화
+        if (currentPage.endsWith('index.html') || currentPage.endsWith('/') || currentPage === '') {
+            const homeLink = mainNav.querySelector('a[href="index.html"]');
+            if (homeLink) homeLink.classList.add('active');
+        } else if (currentPage.endsWith('company.html')) {
+            const companyLink = mainNav.querySelector('a[href="company.html"]');
+            if (companyLink) companyLink.classList.add('active');
+        } else if (currentPage.endsWith('product.html')) {
+            const productLink = mainNav.querySelector('a[href="product.html"]');
+            if (productLink) productLink.classList.add('active');
+        } else if (currentPage.endsWith('press.html')) {
+            const pressLink = mainNav.querySelector('a[href="press.html"]');
+            if (pressLink) pressLink.classList.add('active');
+        } else if (currentPage.endsWith('management-team.html')) {
+            const teamLink = mainNav.querySelector('a[href="management-team.html"]');
+            if (teamLink) teamLink.classList.add('active');
+        } else if (currentPage.endsWith('blog-marketing.html')) {
+            const blogLink = mainNav.querySelector('a[href="blog-marketing.html"]');
+            if (blogLink) blogLink.classList.add('active');
+        } else if (currentPage.endsWith('seo-optimization.html')) {
+            const seoLink = mainNav.querySelector('a[href="seo-optimization.html"]');
+            if (seoLink) seoLink.classList.add('active');
+        } else if (currentPage.endsWith('video-production.html')) {
+            const videoLink = mainNav.querySelector('a[href="video-production.html"]');
+            if (videoLink) videoLink.classList.add('active');
+        } else if (currentPage.endsWith('traffic-marketing.html')) {
+            const trafficLink = mainNav.querySelector('a[href="traffic-marketing.html"]');
+            if (trafficLink) trafficLink.classList.add('active');
+        } else if (currentPage.endsWith('sns-marketing.html')) {
+            const snsLink = mainNav.querySelector('a[href="sns-marketing.html"]');
+            if (snsLink) snsLink.classList.add('active');
+        }
+    }
+}
+
+// 페이지 로드 시 현재 페이지 메뉴 활성화
+document.addEventListener('DOMContentLoaded', function() {
+    setActiveMenu();
+});
+
 // 전역 함수로 등록
 window.showPopups = showPopups;
 window.showPopupsNow = showPopupsNow;
@@ -1351,3 +1472,4 @@ window.closePopup = closePopup;
 window.testPopups = testPopups;
 window.testClosePopup = testClosePopup;
 window.closeAllPopups = closeAllPopups;
+window.setActiveMenu = setActiveMenu;

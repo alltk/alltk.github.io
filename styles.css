@@ -86,6 +86,11 @@ body {
     color: #ffd700;
 }
 
+.main-nav a:active,
+.main-nav a.active {
+    color: #ff0000 !important;
+}
+
 /* 드롭다운 메뉴 */
 .dropdown {
     position: relative;
@@ -152,6 +157,11 @@ body {
     background: #ffd700;
     color: #000;
     transform: translateX(5px);
+}
+
+.dropdown-menu a:active,
+.dropdown-menu a.active {
+    color: #ff0000 !important;
 }
 
 .quote-btn {
@@ -896,22 +906,6 @@ body {
     box-shadow: 0 10px 25px rgba(243, 156, 18, 0.3);
 }
 
-/* 네비게이션 활성 상태 */
-.main-nav a.active {
-    color: #e74c3c;
-    font-weight: 700;
-}
-
-.main-nav a.active::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: #e74c3c;
-    border-radius: 2px;
-}
 
 /* 서비스 섹션 */
 .services {
@@ -1558,6 +1552,7 @@ body {
         right: 15px;
         top: 50%;
         transform: translateY(-50%);
+        z-index: 10003;
     }
     
     /* 모바일에서 메인 네비게이션 숨김 */
@@ -1576,7 +1571,7 @@ body {
         height: 100vh;
         background: #fff;
         box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
-        z-index: 1000;
+        z-index: 10003;
         padding: 80px 30px 30px;
         transform: translateX(100%);
         transition: transform 0.3s ease;
@@ -1602,6 +1597,15 @@ body {
         padding: 12px 0;
         width: 100%;
         border-bottom: 1px solid #f0f0f0;
+        pointer-events: auto;
+        cursor: pointer;
+        z-index: 10004;
+        position: relative;
+    }
+    
+    .main-nav.mobile-open li a:active,
+    .main-nav.mobile-open li a.active {
+        color: #ff0000 !important;
     }
     
     .main-nav.mobile-open .dropdown {
@@ -1615,6 +1619,15 @@ body {
         padding: 12px 0;
         width: 100%;
         border-bottom: 1px solid #f0f0f0;
+        pointer-events: auto;
+        cursor: pointer;
+        z-index: 10004;
+        position: relative;
+    }
+    
+    .main-nav.mobile-open .dropdown-toggle:active,
+    .main-nav.mobile-open .dropdown.active .dropdown-toggle {
+        color: #ff0000 !important;
     }
     
     .main-nav.mobile-open .dropdown-menu {
@@ -1652,6 +1665,15 @@ body {
         font-size: 14px;
         color: #666;
         border-bottom: none;
+        pointer-events: auto;
+        cursor: pointer;
+        z-index: 10004;
+        position: relative;
+    }
+    
+    .main-nav.mobile-open .dropdown-menu a:active,
+    .main-nav.mobile-open .dropdown-menu a.active {
+        color: #ff0000 !important;
     }
     
     .main-nav.mobile-open .dropdown-menu a:hover {
@@ -1673,6 +1695,10 @@ body {
         box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
         transition: all 0.3s ease;
         display: block;
+        pointer-events: auto;
+        cursor: pointer;
+        z-index: 10004;
+        position: relative;
     }
     
     .main-nav.mobile-open .quote-btn:hover {
@@ -1690,8 +1716,9 @@ body {
         left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: 999;
+        background: transparent;
+        z-index: 10001;
+        pointer-events: none;
     }
     
     .mobile-menu-overlay.active {

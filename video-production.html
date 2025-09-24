@@ -36,7 +36,7 @@
                             <li><a href="traffic-marketing.html">트래픽유입활성화</a></li>
                             <li><a href="blog-marketing.html">블로그마케팅</a></li>
                             <li><a href="sns-marketing.html">SNS인스타그램마케팅</a></li>
-                            <li><a href="video-production.html" class="active">홍보영상제작</a></li>
+                            <li><a href="video-production.html">홍보영상제작</a></li>
                             <li><a href="management-team.html">전문관리팀배치</a></li>
                         </ul>
                     </li>
@@ -204,5 +204,147 @@
     </div>
 
     <script src="script.js"></script>
+    
+    <!-- 모바일 메뉴 스크립트 -->
+    <script>
+        // 모바일 메뉴 함수들 정의
+        function openMobileMenu() {
+            console.log('모바일 메뉴 열기');
+            const mainNav = document.querySelector('.main-nav');
+            const overlay = document.querySelector('.mobile-menu-overlay');
+            const toggle = document.getElementById('mobileMenuToggle');
+            
+            if (mainNav) {
+                mainNav.classList.add('mobile-open', 'active');
+            }
+            if (overlay) {
+                overlay.classList.add('active');
+            }
+            if (toggle) {
+                toggle.classList.add('active');
+            }
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeMobileMenu() {
+            console.log('모바일 메뉴 닫기');
+            const mainNav = document.querySelector('.main-nav');
+            const overlay = document.querySelector('.mobile-menu-overlay');
+            const toggle = document.getElementById('mobileMenuToggle');
+            
+            if (mainNav) {
+                mainNav.classList.remove('mobile-open', 'active');
+            }
+            if (overlay) {
+                overlay.classList.remove('active');
+            }
+            if (toggle) {
+                toggle.classList.remove('active');
+            }
+            document.body.style.overflow = '';
+        }
+        
+        // 전역 함수로 등록
+        window.openMobileMenu = openMobileMenu;
+        window.closeMobileMenu = closeMobileMenu;
+        
+        // 모바일 메뉴 토글 버튼 이벤트 리스너 추가
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM 로드 완료, 모바일 메뉴 설정 시작');
+            
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const mainNav = document.querySelector('.main-nav');
+            
+            if (mobileMenuToggle && mainNav) {
+                console.log('모바일 메뉴 요소들 찾음');
+                
+                // 모바일 메뉴 오버레이 생성
+                let overlay = document.querySelector('.mobile-menu-overlay');
+                if (!overlay) {
+                    overlay = document.createElement('div');
+                    overlay.className = 'mobile-menu-overlay';
+                    document.body.appendChild(overlay);
+                    console.log('모바일 메뉴 오버레이 생성');
+                }
+                
+                // 햄버거 메뉴 클릭 이벤트
+                mobileMenuToggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('모바일 메뉴 버튼 클릭됨');
+                    
+                    const isOpen = mainNav.classList.contains('mobile-open');
+                    console.log('현재 메뉴 상태:', isOpen ? '열림' : '닫힘');
+                    
+                    if (isOpen) {
+                        closeMobileMenu();
+                    } else {
+                        openMobileMenu();
+                    }
+                });
+                
+                // 드롭다운 토글 기능
+                const dropdownToggles = mainNav.querySelectorAll('.dropdown-toggle');
+                dropdownToggles.forEach(toggle => {
+                    toggle.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        console.log('드롭다운 토글 클릭됨');
+                        
+                        const dropdown = this.parentElement;
+                        const isActive = dropdown.classList.contains('active');
+                        
+                        // 다른 드롭다운 닫기
+                        document.querySelectorAll('.dropdown').forEach(dd => {
+                            if (dd !== dropdown) {
+                                dd.classList.remove('active');
+                            }
+                        });
+                        
+                        // 현재 드롭다운 토글
+                        if (isActive) {
+                            dropdown.classList.remove('active');
+                        } else {
+                            dropdown.classList.add('active');
+                        }
+                    });
+                });
+                
+                // 메뉴 클릭 시 active 클래스 추가
+                const menuLinks = mainNav.querySelectorAll('a');
+                menuLinks.forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        // 모든 메뉴에서 active 클래스 제거
+                        menuLinks.forEach(l => l.classList.remove('active'));
+                        
+                        // 클릭된 메뉴에 active 클래스 추가
+                        this.classList.add('active');
+                        
+                        // 드롭다운 메뉴 아이템인 경우 부모 드롭다운도 active로 설정
+                        const dropdownMenu = this.closest('.dropdown-menu');
+                        if (dropdownMenu) {
+                            const dropdown = dropdownMenu.closest('.dropdown');
+                            if (dropdown) {
+                                dropdown.classList.add('active');
+                            }
+                        }
+                    });
+                });
+                
+                // 현재 페이지 메뉴 활성화
+                const currentPage = window.location.pathname;
+                const videoLink = mainNav.querySelector('a[href="video-production.html"]');
+                if (currentPage.endsWith('video-production.html')) {
+                    if (videoLink) {
+                        videoLink.classList.add('active');
+                    }
+                }
+                
+                console.log('모바일 메뉴 이벤트 리스너 설정 완료');
+            } else {
+                console.log('모바일 메뉴 요소들을 찾을 수 없음');
+            }
+        });
+    </script>
 </body>
 </html>
