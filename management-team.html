@@ -7,6 +7,55 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- 모달 함수들을 먼저 정의 -->
+    <script>
+        // 모달 함수들을 즉시 정의하고 전역으로 등록
+        function openModal(modalId) {
+            console.log('openModal 호출됨:', modalId);
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+                console.log('모달 열림:', modalId);
+            } else {
+                console.log('모달을 찾을 수 없습니다:', modalId, '- 모달 로드 대기 중...');
+                // 모달이 로드될 때까지 대기
+                waitForModal(modalId);
+            }
+        }
+        
+        // 모달이 로드될 때까지 대기하는 함수
+        function waitForModal(modalId) {
+            const checkModal = () => {
+                const modal = document.getElementById(modalId);
+                if (modal) {
+                    modal.style.display = 'block';
+                    document.body.style.overflow = 'hidden';
+                    console.log('모달 로드 완료 후 열림:', modalId);
+                } else {
+                    // 100ms 후 다시 확인
+                    setTimeout(checkModal, 100);
+                }
+            };
+            checkModal();
+        }
+        
+        function closeModal(modalId) {
+            console.log('closeModal 호출됨:', modalId);
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+                console.log('모달 닫힘:', modalId);
+            }
+        }
+        
+        // 즉시 전역 함수로 등록
+        window.openModal = openModal;
+        window.closeModal = closeModal;
+        console.log('모달 함수 즉시 등록 완료 (head)');
+    </script>
 </head>
 <body>
     <!-- 헤더 -->
@@ -225,9 +274,9 @@
             
             <div class="footer-bottom">
                 <div class="footer-links">
-                    <a href="#" onclick="openModal('privacyModal')">개인정보처리방침</a>
+                    <a href="javascript:void(0)" onclick="openModal('privacyModal')">개인정보처리방침</a>
                     <span>|</span>
-                    <a href="#" onclick="openModal('termsModal')">이용약관</a>
+                    <a href="javascript:void(0)" onclick="openModal('termsModal')">이용약관</a>
                 </div>
                 <p>대표자 : 최정인</p>
                 <p>사업자등록번호 : 208-08-97217</p>
@@ -395,6 +444,58 @@
             } else {
                 console.log('모바일 메뉴 요소들을 찾을 수 없음');
             }
+        });
+    </script>
+    
+    <!-- 모달 컨테이너 -->
+    <div id="modals-container"></div>
+    
+    <!-- 모달 동적 로드 및 함수 -->
+    <script>
+        // 모달 함수들을 먼저 정의하고 전역으로 등록
+        function openModal(modalId) {
+            console.log('openModal 호출됨:', modalId);
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+                console.log('모달 열림:', modalId);
+            } else {
+                console.log('모달을 찾을 수 없습니다:', modalId);
+            }
+        }
+        
+        function closeModal(modalId) {
+            console.log('closeModal 호출됨:', modalId);
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+                console.log('모달 닫힘:', modalId);
+            }
+        }
+        
+        // 즉시 전역 함수로 등록
+        window.openModal = openModal;
+        window.closeModal = closeModal;
+        console.log('모달 함수 즉시 등록 완료');
+        
+        // 모달 HTML 동적 로드
+        function loadModals() {
+            fetch('modals.html')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('modals-container').innerHTML = html;
+                    console.log('모달 HTML 로드 완료');
+                })
+                .catch(error => {
+                    console.error('모달 로드 실패:', error);
+                });
+        }
+        
+        // 페이지 로드 시 모달 로드
+        document.addEventListener('DOMContentLoaded', function() {
+            loadModals();
         });
     </script>
 </body>
