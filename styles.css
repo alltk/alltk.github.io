@@ -3292,7 +3292,7 @@ body {
     width: 100% !important;
     height: 100% !important;
     background-color: transparent !important;
-    z-index: 99999 !important;
+    z-index: 1 !important;
     display: flex !important; /* 기본적으로 표시 */
     justify-content: center !important;
     align-items: center !important;
@@ -3301,6 +3301,7 @@ body {
     padding: 20px !important;
     visibility: visible !important;
     opacity: 1 !important;
+    pointer-events: none !important; /* 클릭 이벤트 비활성화 */
 }
 
 .popup {
@@ -3315,7 +3316,8 @@ body {
     display: block !important; /* 기본적으로 표시 */
     visibility: visible !important;
     opacity: 1 !important;
-    z-index: 100000 !important;
+    z-index: 2 !important;
+    pointer-events: auto !important; /* 팝업은 클릭 이벤트 활성화 */
 }
 
 .popup.hidden {
