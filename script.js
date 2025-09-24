@@ -31,6 +31,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // 언론보도자료 슬라이더 초기화
     initializePressSlider();
     
+    // 수상 이미지 슬라이더 초기화
+    initializeAwardSlider();
+    
     // ABOUT 버튼 이벤트 설정
     setupAboutButton();
     
@@ -39,6 +42,14 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // 모바일 메뉴 설정
     setupMobileMenu();
+    
+    // 팝업 초기화
+    initializePopups();
+    
+    // 팝업 버튼은 onclick으로 처리
+    
+    // 팝업 테스트를 위한 즉시 실행 (개발용)
+    console.log('DOM 로드 완료, 팝업 초기화 시작');
 });
 
 // 스무스 스크롤링 설정
@@ -570,16 +581,24 @@ function initializePressSlider() {
 
 // 언론보도자료 슬라이더 위치 업데이트
 function updatePressSliderPosition() {
-    const pressSlides = document.querySelectorAll('.press-slide');
-    const pressDots = document.querySelectorAll('.press-release .dot');
-    
-    pressSlides.forEach((slide, index) => {
-        slide.classList.toggle('active', index === currentPressSlideIndex);
-    });
-    
-    pressDots.forEach((dot, index) => {
-        dot.classList.toggle('active', index === currentPressSlideIndex);
-    });
+    try {
+        const pressSlides = document.querySelectorAll('.press-slide');
+        const pressDots = document.querySelectorAll('.press-release .dot');
+        
+        if (pressSlides.length > 0) {
+            pressSlides.forEach((slide, index) => {
+                slide.classList.toggle('active', index === currentPressSlideIndex);
+            });
+        }
+        
+        if (pressDots.length > 0) {
+            pressDots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentPressSlideIndex);
+            });
+        }
+    } catch (error) {
+        console.log('Press slider update error:', error);
+    }
 }
 
 // 언론보도자료 슬라이드 변경
@@ -761,3 +780,574 @@ function setupMobileMenu() {
         document.body.style.overflow = '';
     }
 }
+
+// 수상 이미지 슬라이드 기능
+// 전역 변수 중복 선언 방지 및 재사용을 위해 이미 선언된 경우 재선언하지 않음
+if (typeof currentSlideIndex === 'undefined') {
+    var currentSlideIndex = 0;
+}
+if (typeof totalSlides === 'undefined') {
+    var totalSlides = 3;
+}
+
+function moveSlide(direction) {
+    currentSlideIndex += direction;
+    
+    if (currentSlideIndex >= totalSlides) {
+        currentSlideIndex = 0;
+    } else if (currentSlideIndex < 0) {
+        currentSlideIndex = totalSlides - 1;
+    }
+    
+    updateSlider();
+}
+
+function currentSlide(slideNumber) {
+    currentSlideIndex = slideNumber - 1;
+    updateSlider();
+}
+
+function updateSlider() {
+    const sliderTrack = document.querySelector('.slider-track');
+    const dots = document.querySelectorAll('.dot');
+    
+    if (sliderTrack) {
+        // GPU 가속을 위한 transform3d 사용
+        sliderTrack.style.transform = `translate3d(-${currentSlideIndex * 100}%, 0, 0)`;
+    }
+    
+    // Update dots - 더 효율적인 방법
+    if (dots.length > 0) {
+        dots.forEach((dot, index) => {
+            if (index === currentSlideIndex) {
+                dot.classList.add('active');
+            } else {
+                dot.classList.remove('active');
+            }
+        });
+    }
+}
+
+// 자동 슬라이드 기능 (선택사항)
+function startAutoSlide() {
+    setInterval(() => {
+        moveSlide(1);
+    }, 5000); // 5초마다 자동 슬라이드
+}
+
+// 간단한 수상 이미지 슬라이드
+let currentAward = 1;
+
+function showAward(number) {
+    // 모든 이미지에서 active 클래스 제거
+    const images = document.querySelectorAll('.award-img');
+    images.forEach(img => img.classList.remove('active'));
+    
+    // 선택된 이미지에 active 클래스 추가
+    const targetImg = document.getElementById('award' + number);
+    if (targetImg) {
+        targetImg.classList.add('active');
+        currentAward = number;
+    }
+}
+
+function nextAward() {
+    currentAward++;
+    if (currentAward > 3) {
+        currentAward = 1;
+    }
+    showAward(currentAward);
+}
+
+// 수상 이미지 슬라이드 함수들
+let currentAwardSlideIndex = 0;
+const totalAwardSlides = 3;
+
+function changeAwardSlide(direction) {
+    console.log('changeAwardSlide 호출됨:', direction);
+    
+    const slides = document.querySelectorAll('.awards-slider-container .award-slide');
+    const dots = document.querySelectorAll('.awards-slider-container .dot');
+    
+    console.log('슬라이드 개수:', slides.length);
+    console.log('도트 개수:', dots.length);
+    console.log('현재 인덱스:', currentAwardSlideIndex);
+    
+    if (slides.length === 0 || dots.length === 0) {
+        console.log('슬라이드 또는 도트를 찾을 수 없음');
+        return;
+    }
+    
+    // 현재 슬라이드 비활성화
+    slides[currentAwardSlideIndex].style.display = 'none';
+    dots[currentAwardSlideIndex].classList.remove('active');
+    
+    // 다음 슬라이드 인덱스 계산
+    currentAwardSlideIndex += direction;
+    
+    if (currentAwardSlideIndex >= totalAwardSlides) {
+        currentAwardSlideIndex = 0;
+    } else if (currentAwardSlideIndex < 0) {
+        currentAwardSlideIndex = totalAwardSlides - 1;
+    }
+    
+    console.log('새 인덱스:', currentAwardSlideIndex);
+    
+    // 새 슬라이드 활성화
+    slides[currentAwardSlideIndex].style.display = 'block';
+    dots[currentAwardSlideIndex].classList.add('active');
+    
+    console.log('슬라이드 변경 완료');
+}
+
+function currentAwardSlide(slideNumber) {
+    console.log('currentAwardSlide 호출됨:', slideNumber);
+    
+    const slides = document.querySelectorAll('.awards-slider-container .award-slide');
+    const dots = document.querySelectorAll('.awards-slider-container .dot');
+    
+    if (slides.length === 0 || dots.length === 0) {
+        console.log('슬라이드 또는 도트를 찾을 수 없음');
+        return;
+    }
+    
+    // 현재 슬라이드 비활성화
+    slides[currentAwardSlideIndex].style.display = 'none';
+    dots[currentAwardSlideIndex].classList.remove('active');
+    
+    // 새 슬라이드 인덱스 설정
+    currentAwardSlideIndex = slideNumber - 1;
+    
+    // 새 슬라이드 활성화
+    slides[currentAwardSlideIndex].style.display = 'block';
+    dots[currentAwardSlideIndex].classList.add('active');
+    
+    console.log('도트 클릭으로 슬라이드 변경 완료');
+}
+
+// 수상 이미지 슬라이더 초기화 함수
+function initializeAwardSlider() {
+    try {
+        console.log('수상 슬라이더 초기화 시작');
+        
+        // 슬라이더 요소들 확인
+        const slides = document.querySelectorAll('.awards-slider-container .award-slide');
+        const dots = document.querySelectorAll('.awards-slider-container .dot');
+        
+        console.log('슬라이드 개수:', slides.length);
+        console.log('도트 개수:', dots.length);
+        
+        if (slides.length > 0 && dots.length > 0) {
+            // 초기 위치 설정
+            currentAwardSlideIndex = 0;
+            
+            // 첫 번째 슬라이드만 활성화
+            slides.forEach((slide, index) => {
+                if (index === 0) {
+                    slide.classList.add('active');
+                } else {
+                    slide.classList.remove('active');
+                }
+            });
+            
+            // 첫 번째 도트만 활성화
+            dots.forEach((dot, index) => {
+                if (index === 0) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+            
+            console.log('수상 슬라이더 초기화 완료');
+        } else {
+            console.log('수상 슬라이더 요소를 찾을 수 없음');
+        }
+    } catch (error) {
+        console.error('수상 슬라이더 초기화 오류:', error);
+    }
+}
+
+// 페이지 로드 시 슬라이드 초기화
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM loaded, initializing sliders...');
+    
+    // 기존 슬라이드 초기화
+    setTimeout(() => {
+        try {
+            updateSlider();
+            console.log('Main slider initialized');
+        } catch (error) {
+            console.log('Main slider error:', error);
+        }
+    }, 100);
+    
+    // 언론보도 슬라이드 초기화
+    setTimeout(() => {
+        try {
+            updatePressSliderPosition();
+            console.log('Press slider initialized');
+        } catch (error) {
+            console.log('Press slider error:', error);
+        }
+    }, 150);
+    
+    // 수상 슬라이드 초기화
+    setTimeout(() => {
+        try {
+            updateAwardSlider();
+            console.log('Award slider initialized');
+        } catch (error) {
+            console.log('Award slider error:', error);
+        }
+    }, 200);
+});
+
+// 팝업 관련 함수들
+function initializePopups() {
+    console.log('팝업 초기화 시작');
+    
+    // 즉시 팝업 표시
+    showPopups();
+    
+    // 1초 후 재시도
+    setTimeout(() => {
+        console.log('1초 후 팝업 재시도');
+        showPopups();
+    }, 1000);
+    
+    // 3초 후 재시도
+    setTimeout(() => {
+        console.log('3초 후 팝업 재시도');
+        showPopups();
+    }, 3000);
+    
+    // 5초 후 재시도
+    setTimeout(() => {
+        console.log('5초 후 팝업 재시도');
+        showPopups();
+    }, 5000);
+}
+
+// 팝업 버튼은 onclick으로 처리하므로 별도 함수 불필요
+
+function showPopups() {
+    console.log('팝업 표시 함수 실행');
+    
+    // 팝업 오버레이 찾기
+    const popupOverlay = document.getElementById('popupOverlay');
+    if (!popupOverlay) {
+        console.log('팝업 오버레이를 찾을 수 없습니다!');
+        return;
+    }
+    
+    console.log('팝업 오버레이 찾음, 강제 표시 중...');
+    
+    // 오버레이 강제 표시
+    popupOverlay.style.display = 'flex';
+    popupOverlay.style.visibility = 'visible';
+    popupOverlay.style.opacity = '1';
+    popupOverlay.style.zIndex = '99999';
+    
+    // 각 팝업 확인 및 표시
+    for (let i = 1; i <= 4; i++) {
+        const popup = document.getElementById(`popup${i}`);
+        if (popup) {
+            console.log(`팝업 ${i} 표시`);
+            popup.style.display = 'block';
+            popup.style.visibility = 'visible';
+            popup.style.opacity = '1';
+        } else {
+            console.log(`팝업 ${i}를 찾을 수 없습니다!`);
+        }
+    }
+    
+    console.log('팝업 표시 완료');
+}
+
+function closePopup(popupNumber) {
+    console.log(`팝업 ${popupNumber} 닫기 시도`);
+    
+    const popup = document.getElementById(`popup${popupNumber}`);
+    if (popup) {
+        console.log(`팝업 ${popupNumber} 찾음, 닫는 중...`);
+        
+        // 간단한 방법으로 팝업 숨김
+        popup.style.display = 'none';
+        popup.style.visibility = 'hidden';
+        popup.style.opacity = '0';
+        
+        // 클래스 추가
+        popup.classList.add('hidden');
+        
+        console.log(`팝업 ${popupNumber} 닫기 완료`);
+        
+        // 모든 팝업이 닫혔는지 확인
+        checkAllPopupsClosed();
+    } else {
+        console.log(`팝업 ${popupNumber}를 찾을 수 없습니다!`);
+    }
+}
+
+// "오늘 다시 보지 않기" 기능 제거됨
+
+// "오늘 다시 보지 않기" 관련 함수들 제거됨
+
+function checkAllPopupsClosed() {
+    console.log('모든 팝업 닫힘 상태 확인 중...');
+    
+    const popupOverlay = document.getElementById('popupOverlay');
+    if (!popupOverlay) {
+        console.log('팝업 오버레이를 찾을 수 없습니다');
+        return;
+    }
+    
+    let visibleCount = 0;
+    
+    // 각 팝업의 상태를 직접 확인
+    for (let i = 1; i <= 4; i++) {
+        const popup = document.getElementById(`popup${i}`);
+        if (popup) {
+            const computedStyle = window.getComputedStyle(popup);
+            const isVisible = computedStyle.display !== 'none' && 
+                             computedStyle.visibility !== 'hidden' && 
+                             computedStyle.opacity !== '0';
+            
+            if (isVisible) {
+                visibleCount++;
+                console.log(`팝업 ${i}는 여전히 보임 (display: ${computedStyle.display}, visibility: ${computedStyle.visibility}, opacity: ${computedStyle.opacity})`);
+            } else {
+                console.log(`팝업 ${i}는 닫힘`);
+            }
+        }
+    }
+    
+    console.log(`보이는 팝업 개수: ${visibleCount}`);
+    
+    // 모든 팝업이 닫혔으면 오버레이도 숨기기
+    if (visibleCount === 0) {
+        console.log('모든 팝업이 닫혔으므로 오버레이 숨김');
+        popupOverlay.style.setProperty('display', 'none', 'important');
+        popupOverlay.style.setProperty('visibility', 'hidden', 'important');
+        popupOverlay.style.setProperty('opacity', '0', 'important');
+    } else {
+        console.log(`${visibleCount}개의 팝업이 여전히 보임`);
+    }
+}
+
+// 팝업 오버레이 클릭 시 닫기 (팝업 자체가 아닌 오버레이 클릭 시)
+document.addEventListener('click', function(event) {
+    const popupOverlay = document.getElementById('popupOverlay');
+    if (popupOverlay && event.target === popupOverlay) {
+        // 모든 팝업 닫기
+        for (let i = 1; i <= 4; i++) {
+            const popup = document.getElementById(`popup${i}`);
+            if (popup) {
+                popup.style.display = 'none';
+            }
+        }
+        popupOverlay.style.display = 'none';
+    }
+});
+
+// ESC 키로 팝업 닫기
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        const popupOverlay = document.getElementById('popupOverlay');
+        if (popupOverlay && popupOverlay.style.display === 'flex') {
+            // 모든 팝업 닫기
+            for (let i = 1; i <= 4; i++) {
+                const popup = document.getElementById(`popup${i}`);
+                if (popup) {
+                    popup.style.display = 'none';
+                }
+            }
+            popupOverlay.style.display = 'none';
+        }
+    }
+});
+
+// 팝업 강제 표시 함수 (테스트용)
+function forceShowPopups() {
+    console.log('팝업 강제 표시 시작');
+    
+    const popupOverlay = document.getElementById('popupOverlay');
+    if (!popupOverlay) {
+        console.log('팝업 오버레이를 찾을 수 없습니다!');
+        alert('팝업 오버레이를 찾을 수 없습니다!');
+        return;
+    }
+    
+    console.log('팝업 오버레이 찾음, 강제 표시 중...');
+    
+    // 오버레이 강제 표시
+    popupOverlay.style.display = 'flex';
+    popupOverlay.style.visibility = 'visible';
+    popupOverlay.style.opacity = '1';
+    popupOverlay.style.zIndex = '99999';
+    popupOverlay.style.position = 'fixed';
+    popupOverlay.style.top = '0';
+    popupOverlay.style.left = '0';
+    popupOverlay.style.width = '100%';
+    popupOverlay.style.height = '100%';
+    
+    // 모든 팝업 강제 표시
+    for (let i = 1; i <= 4; i++) {
+        const popup = document.getElementById(`popup${i}`);
+        if (popup) {
+            console.log(`팝업 ${i} 강제 표시`);
+            popup.style.display = 'block';
+            popup.style.visibility = 'visible';
+            popup.style.opacity = '1';
+            popup.style.zIndex = '100000';
+            popup.style.position = 'relative';
+        } else {
+            console.log(`팝업 ${i}를 찾을 수 없습니다!`);
+        }
+    }
+    
+    console.log('팝업 강제 표시 완료');
+    alert('팝업이 강제로 표시되었습니다!');
+}
+
+// 간단한 팝업 테스트 함수
+function testPopups() {
+    console.log('팝업 테스트 시작');
+    const overlay = document.getElementById('popupOverlay');
+    if (overlay) {
+        overlay.style.display = 'flex';
+        console.log('팝업이 표시되었습니다!');
+    } else {
+        console.log('팝업 오버레이를 찾을 수 없습니다!');
+    }
+}
+
+// 즉시 팝업 표시 함수
+function showPopupsNow() {
+    console.log('즉시 팝업 표시');
+    const overlay = document.getElementById('popupOverlay');
+    if (overlay) {
+        overlay.style.display = 'flex';
+        overlay.style.visibility = 'visible';
+        overlay.style.opacity = '1';
+        console.log('팝업 오버레이 표시 완료');
+    }
+    
+    for (let i = 1; i <= 4; i++) {
+        const popup = document.getElementById(`popup${i}`);
+        if (popup) {
+            popup.style.display = 'block';
+            popup.style.visibility = 'visible';
+            popup.style.opacity = '1';
+            console.log(`팝업 ${i} 표시 완료`);
+        }
+    }
+}
+
+// 간단한 팝업 닫기 테스트 함수
+function testClosePopup(popupNumber) {
+    console.log(`팝업 ${popupNumber} 닫기 테스트`);
+    const popup = document.getElementById(`popup${popupNumber}`);
+    if (popup) {
+        popup.style.display = 'none';
+        popup.style.visibility = 'hidden';
+        popup.style.opacity = '0';
+        console.log(`팝업 ${popupNumber} 닫기 테스트 완료!`);
+    } else {
+        console.log(`팝업 ${popupNumber}를 찾을 수 없습니다!`);
+    }
+}
+
+// 전역에서 바로 사용할 수 있는 간단한 함수들
+window.testClose1 = function() { testClosePopup(1); };
+window.testClose2 = function() { testClosePopup(2); };
+window.testClose3 = function() { testClosePopup(3); };
+window.testClose4 = function() { testClosePopup(4); };
+
+// 직접적인 팝업 닫기 함수들 - 즉시 실행
+(function() {
+    window.close1 = function() { 
+        const popup = document.getElementById('popup1');
+        if (popup) {
+            popup.style.setProperty('display', 'none', 'important');
+            console.log('팝업 1 닫기 완료');
+        } else {
+            console.log('팝업 1을 찾을 수 없습니다');
+        }
+    };
+    
+    window.close2 = function() { 
+        const popup = document.getElementById('popup2');
+        if (popup) {
+            popup.style.setProperty('display', 'none', 'important');
+            console.log('팝업 2 닫기 완료');
+        } else {
+            console.log('팝업 2를 찾을 수 없습니다');
+        }
+    };
+    
+    window.close3 = function() { 
+        const popup = document.getElementById('popup3');
+        if (popup) {
+            popup.style.setProperty('display', 'none', 'important');
+            console.log('팝업 3 닫기 완료');
+        } else {
+            console.log('팝업 3을 찾을 수 없습니다');
+        }
+    };
+    
+    window.close4 = function() { 
+        const popup = document.getElementById('popup4');
+        if (popup) {
+            popup.style.setProperty('display', 'none', 'important');
+            console.log('팝업 4 닫기 완료');
+        } else {
+            console.log('팝업 4를 찾을 수 없습니다');
+        }
+    };
+    
+    console.log('팝업 닫기 함수들이 등록되었습니다: close1(), close2(), close3(), close4()');
+    
+    // 더 간단한 함수들도 추가
+    window.c1 = window.close1;
+    window.c2 = window.close2;
+    window.c3 = window.close3;
+    window.c4 = window.close4;
+    
+    console.log('간단한 함수들도 등록되었습니다: c1(), c2(), c3(), c4()');
+})();
+
+// 모든 팝업 닫기 함수
+function closeAllPopups() {
+    console.log('모든 팝업 닫기 시도');
+    
+    for (let i = 1; i <= 4; i++) {
+        const popup = document.getElementById(`popup${i}`);
+        if (popup) {
+            popup.style.setProperty('display', 'none', 'important');
+            popup.style.setProperty('visibility', 'hidden', 'important');
+            popup.style.setProperty('opacity', '0', 'important');
+            popup.style.setProperty('z-index', '-1', 'important');
+            console.log(`팝업 ${i} 닫기 완료`);
+        }
+    }
+    
+    const overlay = document.getElementById('popupOverlay');
+    if (overlay) {
+        overlay.style.setProperty('display', 'none', 'important');
+        overlay.style.setProperty('visibility', 'hidden', 'important');
+        overlay.style.setProperty('opacity', '0', 'important');
+        console.log('팝업 오버레이 닫기 완료');
+    }
+    
+    console.log('모든 팝업이 닫혔습니다!');
+}
+
+// 전역 함수로 등록
+window.showPopups = showPopups;
+window.showPopupsNow = showPopupsNow;
+window.forceShowPopups = forceShowPopups;
+window.closePopup = closePopup;
+window.testPopups = testPopups;
+window.testClosePopup = testClosePopup;
+window.closeAllPopups = closeAllPopups;

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>언론보도 및 수상 - 브랜드누누</title>
     <meta name="description" content="브랜드누누의 언론보도자료와 수상 내역을 확인하세요. 디지털 마케팅 분야에서의 성과와 인정받은 전문성을 확인할 수 있습니다.">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=20250120_5">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
@@ -68,13 +68,13 @@
             </div>
             
             <div class="press-slider">
-                <div class="press-slide active">
+                <div class="press-slide active" id="press-slide-1">
                     <img src="img/pressrelease_01.png" alt="언론보도 1" class="press-image">
                 </div>
-                <div class="press-slide">
+                <div class="press-slide" id="press-slide-2">
                     <img src="img/pressrelease_02.png" alt="언론보도 2" class="press-image">
                 </div>
-                <div class="press-slide">
+                <div class="press-slide" id="press-slide-3">
                     <img src="img/pressrelease_03.png" alt="언론보도 3" class="press-image">
                 </div>
             </div>
@@ -84,9 +84,9 @@
                     <i class="fas fa-chevron-left"></i>
                 </button>
                 <div class="slider-dots">
-                    <span class="dot active" onclick="currentPressSlide(1)"></span>
-                    <span class="dot" onclick="currentPressSlide(2)"></span>
-                    <span class="dot" onclick="currentPressSlide(3)"></span>
+                    <span class="dot active" onclick="currentPressSlide(1)" id="press-dot1"></span>
+                    <span class="dot" onclick="currentPressSlide(2)" id="press-dot2"></span>
+                    <span class="dot" onclick="currentPressSlide(3)" id="press-dot3"></span>
                 </div>
                 <button class="nav-btn" onclick="changePressSlide(1)">
                     <i class="fas fa-chevron-right"></i>
@@ -102,7 +102,7 @@
                 <h3>수상 내역</h3>
                 <p>디지털 마케팅 분야에서 인정받은 브랜드누누의 전문성</p>
             </div>
-            
+
             <div class="awards-grid">
                 <div class="award-card">
                     <div class="award-year">2024</div>
@@ -176,88 +176,42 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- 고객 성과 섹션 -->
-    <section class="client-results">
-        <div class="container">
-            <div class="section-header">
-                <h3>고객 성과</h3>
-                <p>브랜드누누와 함께한 고객들의 놀라운 성과</p>
-            </div>
-            
-            <div class="results-grid">
-                <div class="result-item">
-                    <div class="result-number">300%</div>
-                    <div class="result-label">평균 트래픽 증가율</div>
-                    <div class="result-description">6개월 내 고객사 웹사이트 트래픽 평균 증가율</div>
+            <!-- 수상 이미지 슬라이드 -->
+            <div class="awards-slider-container">
+                <div class="slider-title">
+                    <h4>수상 증명서</h4>
+                    <p>브랜드누누의 수상 내역을 확인하세요</p>
+                </div>
+                <div class="awards-slider">
+                    <div class="award-slide" id="award-slide-1">
+                        <img src="img/pressrelease_01.jpg" alt="수상 내역 1" class="award-image" loading="lazy">
+                    </div>
+                    <div class="award-slide" id="award-slide-2">
+                        <img src="img/pressrelease_02.jpg" alt="수상 내역 2" class="award-image" loading="lazy">
+                    </div>
+                    <div class="award-slide" id="award-slide-3">
+                        <img src="img/pressrelease_03.jpg" alt="수상 내역 3" class="award-image" loading="lazy">
+                    </div>
                 </div>
                 
-                <div class="result-item">
-                    <div class="result-number">150%</div>
-                    <div class="result-label">전환율 향상</div>
-                    <div class="result-description">SEO 최적화를 통한 평균 전환율 개선</div>
-                </div>
-                
-                <div class="result-item">
-                    <div class="result-number">500+</div>
-                    <div class="result-label">성공 사례</div>
-                    <div class="result-description">지금까지 함께한 고객사의 성공 사례</div>
-                </div>
-                
-                <div class="result-item">
-                    <div class="result-number">95%</div>
-                    <div class="result-label">고객 만족도</div>
-                    <div class="result-description">서비스 만족도 조사 결과</div>
+                <div class="slider-nav">
+                    <button class="nav-btn" onclick="changeAwardSlide(-1)" id="prevBtn">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <div class="slider-dots">
+                        <span class="dot active" onclick="currentAwardSlide(1)" id="dot1"></span>
+                        <span class="dot" onclick="currentAwardSlide(2)" id="dot2"></span>
+                        <span class="dot" onclick="currentAwardSlide(3)" id="dot3"></span>
+                    </div>
+                    <button class="nav-btn" onclick="changeAwardSlide(1)" id="nextBtn">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 인증서 섹션 -->
-    <section class="certifications">
-        <div class="container">
-            <div class="section-header">
-                <h3>인증서 및 자격</h3>
-                <p>브랜드누누의 전문성을 보증하는 인증서들</p>
-            </div>
-            
-            <div class="cert-grid">
-                <div class="cert-item">
-                    <div class="cert-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <h4>ISO 27001 인증</h4>
-                    <p>정보보안 관리시스템 국제 표준 인증</p>
-                </div>
-                
-                <div class="cert-item">
-                    <div class="cert-icon">
-                        <i class="fas fa-lock"></i>
-                    </div>
-                    <h4>개인정보보호 인증</h4>
-                    <p>개인정보보호법 준수 인증서</p>
-                </div>
-                
-                <div class="cert-item">
-                    <div class="cert-icon">
-                        <i class="fas fa-check-circle"></i>
-                    </div>
-                    <h4>Google 파트너 인증</h4>
-                    <p>구글 공식 파트너 인증</p>
-                </div>
-                
-                <div class="cert-item">
-                    <div class="cert-icon">
-                        <i class="fas fa-certificate"></i>
-                    </div>
-                    <h4>Facebook 마케팅 파트너</h4>
-                    <p>페이스북 공식 마케팅 파트너 인증</p>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- 문의하기 섹션 -->
     <section class="contact-section" id="contact">
@@ -272,7 +226,7 @@
                             <i class="fas fa-comment"></i>
                             <span>카카오톡 문의</span>
                         </a>
-                        <a href="tel: 010-2048-7706" class="contact-btn phone-btn">
+                        <a href="tel: 1600-3070" class="contact-btn phone-btn">
                             <i class="fas fa-phone"></i>
                             <span>전화 문의</span>
                         </a>
@@ -330,7 +284,7 @@
                 <p>대표자 : 최정인</p>
                 <p>사업자등록번호 : 208-08-97217</p>
                 <p>주소 : 경기도 시흥시 서울대학로77, 616호</p>
-                <p>대표전화 : 010-2048-7706</p>
+                <p>대표전화 : 1600-3070</p>
                 <p>이메일 : cji.brandnunu@gmail.com</p>
                 <p>COPYRIGHTⓒ 2025 브랜드누누 ALL RIGHTS RESERVED.</p>
             </div>
@@ -346,12 +300,184 @@
             <i class="fas fa-comment"></i>
             <span class="btn-text">카톡</span>
         </a>
-        <a href="tel: 010-2048-7706" class="floating-btn phone-float" title="전화 문의">
+        <a href="tel: 1600-3070" class="floating-btn phone-float" title="전화 문의">
             <i class="fas fa-phone"></i>
             <span class="btn-text">전화</span>
         </a>
     </div>
 
-    <script src="script.js"></script>
+    <script src="script.js?v=20250120_5"></script>
+    
+    <script>
+    // Press 슬라이드 전용 스크립트
+    let currentPressSlideIndex = 0;
+    const totalPressSlides = 3;
+    
+    function changePressSlide(direction) {
+        console.log('changePressSlide 호출됨:', direction);
+        
+        // 모든 press 슬라이드 숨기기
+        document.getElementById('press-slide-1').style.display = 'none';
+        document.getElementById('press-slide-2').style.display = 'none';
+        document.getElementById('press-slide-3').style.display = 'none';
+        
+        // 모든 press 도트 비활성화
+        document.getElementById('press-dot1').classList.remove('active');
+        document.getElementById('press-dot2').classList.remove('active');
+        document.getElementById('press-dot3').classList.remove('active');
+        
+        // 다음 슬라이드 인덱스 계산
+        currentPressSlideIndex += direction;
+        
+        if (currentPressSlideIndex >= totalPressSlides) {
+            currentPressSlideIndex = 0;
+        } else if (currentPressSlideIndex < 0) {
+            currentPressSlideIndex = totalPressSlides - 1;
+        }
+        
+        // 새 슬라이드 활성화
+        document.getElementById('press-slide-' + (currentPressSlideIndex + 1)).style.display = 'block';
+        document.getElementById('press-dot' + (currentPressSlideIndex + 1)).classList.add('active');
+        
+        console.log('Press 슬라이드 변경 완료, 현재 인덱스:', currentPressSlideIndex);
+    }
+    
+    function currentPressSlide(slideNumber) {
+        console.log('currentPressSlide 호출됨:', slideNumber);
+        
+        // 모든 press 슬라이드 숨기기
+        document.getElementById('press-slide-1').style.display = 'none';
+        document.getElementById('press-slide-2').style.display = 'none';
+        document.getElementById('press-slide-3').style.display = 'none';
+        
+        // 모든 press 도트 비활성화
+        document.getElementById('press-dot1').classList.remove('active');
+        document.getElementById('press-dot2').classList.remove('active');
+        document.getElementById('press-dot3').classList.remove('active');
+        
+        // 새 슬라이드 인덱스 설정
+        currentPressSlideIndex = slideNumber - 1;
+        
+        // 새 슬라이드 활성화
+        document.getElementById('press-slide-' + slideNumber).style.display = 'block';
+        document.getElementById('press-dot' + slideNumber).classList.add('active');
+        
+        console.log('Press 도트 클릭으로 슬라이드 변경 완료, 현재 인덱스:', currentPressSlideIndex);
+    }
+    
+    // 수상 슬라이드 전용 스크립트
+    let currentAwardSlideIndex = 0;
+    const totalAwardSlides = 3;
+    
+    function changeAwardSlide(direction) {
+        console.log('changeAwardSlide 호출됨:', direction);
+        
+        // 모든 슬라이드 숨기기 (강제로)
+        const slide1 = document.getElementById('award-slide-1');
+        const slide2 = document.getElementById('award-slide-2');
+        const slide3 = document.getElementById('award-slide-3');
+        
+        slide1.style.display = 'none';
+        slide1.classList.remove('active');
+        slide2.style.display = 'none';
+        slide2.classList.remove('active');
+        slide3.style.display = 'none';
+        slide3.classList.remove('active');
+        
+        // 모든 도트 비활성화
+        document.getElementById('dot1').classList.remove('active');
+        document.getElementById('dot2').classList.remove('active');
+        document.getElementById('dot3').classList.remove('active');
+        
+        // 다음 슬라이드 인덱스 계산
+        currentAwardSlideIndex += direction;
+        
+        if (currentAwardSlideIndex >= totalAwardSlides) {
+            currentAwardSlideIndex = 0;
+        } else if (currentAwardSlideIndex < 0) {
+            currentAwardSlideIndex = totalAwardSlides - 1;
+        }
+        
+        // 새 슬라이드 활성화 (강제로)
+        const newSlide = document.getElementById('award-slide-' + (currentAwardSlideIndex + 1));
+        newSlide.style.display = 'block';
+        newSlide.classList.add('active');
+        
+        document.getElementById('dot' + (currentAwardSlideIndex + 1)).classList.add('active');
+        
+        console.log('슬라이드 변경 완료, 현재 인덱스:', currentAwardSlideIndex);
+        console.log('활성화된 슬라이드:', newSlide.id);
+    }
+    
+    function currentAwardSlide(slideNumber) {
+        console.log('currentAwardSlide 호출됨:', slideNumber);
+        
+        // 모든 슬라이드 숨기기 (강제로)
+        const slide1 = document.getElementById('award-slide-1');
+        const slide2 = document.getElementById('award-slide-2');
+        const slide3 = document.getElementById('award-slide-3');
+        
+        slide1.style.display = 'none';
+        slide1.classList.remove('active');
+        slide2.style.display = 'none';
+        slide2.classList.remove('active');
+        slide3.style.display = 'none';
+        slide3.classList.remove('active');
+        
+        // 모든 도트 비활성화
+        document.getElementById('dot1').classList.remove('active');
+        document.getElementById('dot2').classList.remove('active');
+        document.getElementById('dot3').classList.remove('active');
+        
+        // 새 슬라이드 인덱스 설정
+        currentAwardSlideIndex = slideNumber - 1;
+        
+        // 새 슬라이드 활성화 (강제로)
+        const newSlide = document.getElementById('award-slide-' + slideNumber);
+        newSlide.style.display = 'block';
+        newSlide.classList.add('active');
+        
+        document.getElementById('dot' + slideNumber).classList.add('active');
+        
+        console.log('도트 클릭으로 슬라이드 변경 완료, 현재 인덱스:', currentAwardSlideIndex);
+        console.log('활성화된 슬라이드:', newSlide.id);
+    }
+    
+    // 페이지 로드 시 초기화
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('슬라이드 초기화 시작');
+        
+        // Press 슬라이드 초기화
+        document.getElementById('press-slide-1').style.display = 'block';
+        document.getElementById('press-slide-2').style.display = 'none';
+        document.getElementById('press-slide-3').style.display = 'none';
+        
+        document.getElementById('press-dot1').classList.add('active');
+        document.getElementById('press-dot2').classList.remove('active');
+        document.getElementById('press-dot3').classList.remove('active');
+        
+        currentPressSlideIndex = 0;
+        
+        // 수상 슬라이드 초기화
+        const awardSlide1 = document.getElementById('award-slide-1');
+        const awardSlide2 = document.getElementById('award-slide-2');
+        const awardSlide3 = document.getElementById('award-slide-3');
+        
+        awardSlide1.style.display = 'block';
+        awardSlide1.classList.add('active');
+        awardSlide2.style.display = 'none';
+        awardSlide2.classList.remove('active');
+        awardSlide3.style.display = 'none';
+        awardSlide3.classList.remove('active');
+        
+        document.getElementById('dot1').classList.add('active');
+        document.getElementById('dot2').classList.remove('active');
+        document.getElementById('dot3').classList.remove('active');
+        
+        currentAwardSlideIndex = 0;
+        
+        console.log('모든 슬라이드 초기화 완료');
+    });
+    </script>
 </body>
 </html>

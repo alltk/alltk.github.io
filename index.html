@@ -249,7 +249,7 @@
                             <i class="fas fa-comment"></i>
                             <span>카카오톡 문의</span>
                         </a>
-                        <a href="tel: 010-2048-7706" class="contact-btn phone-btn">
+                        <a href="tel: 1600-3070" class="contact-btn phone-btn">
                             <i class="fas fa-phone"></i>
                             <span>전화 문의</span>
                         </a>
@@ -309,7 +309,7 @@
                 <p>대표자 : 최정인</p>
                 <p>사업자등록번호 : 208-08-97217</p>
                 <p>주소 : 경기도 시흥시 서울대학로77, 616호</p>
-                <p>대표전화 : 010-2048-7706</p>
+                <p>대표전화 : 1600-3070</p>
                 <p>이메일 : cji.brandnunu@gmail.com</p>
                 <p>COPYRIGHTⓒ 2025 브랜드누누 ALL RIGHTS RESERVED.</p>
             </div>
@@ -328,16 +328,67 @@
         </div>
     </div>
 
+    <!-- 팝업 이미지들 -->
+    <div class="popup-overlay" id="popupOverlay" style="display: flex !important; visibility: visible !important; opacity: 1 !important; z-index: 99999 !important; background-color: transparent !important;">
+        <!-- 팝업 1 - 좌상단 -->
+        <div class="popup popup-1" id="popup1" style="display: block !important; visibility: visible !important; opacity: 1 !important; position: absolute !important; top: 10% !important; left: 10% !important; max-width: 350px !important; min-width: 280px !important;">
+            <div class="popup-content">
+                <img src="img/popup1.jpg" alt="팝업 이미지 1" class="popup-image">
+                <div class="popup-buttons">
+                    <button class="popup-btn close-btn" onclick="document.getElementById('popup1').style.setProperty('display', 'none', 'important')">닫기</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 팝업 2 - 우상단 -->
+        <div class="popup popup-2" id="popup2" style="display: block !important; visibility: visible !important; opacity: 1 !important; position: absolute !important; top: 10% !important; right: 10% !important; max-width: 350px !important; min-width: 280px !important;">
+            <div class="popup-content">
+                <img src="img/popup2.jpg" alt="팝업 이미지 2" class="popup-image">
+                <div class="popup-buttons">
+                    <button class="popup-btn close-btn" onclick="document.getElementById('popup2').style.setProperty('display', 'none', 'important')">닫기</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 팝업 3 - 좌하단 -->
+        <div class="popup popup-3" id="popup3" style="display: block !important; visibility: visible !important; opacity: 1 !important; position: absolute !important; bottom: 10% !important; left: 10% !important; max-width: 350px !important; min-width: 280px !important;">
+            <div class="popup-content">
+                <img src="img/popup3.jpg" alt="팝업 이미지 3" class="popup-image">
+                <div class="popup-buttons">
+                    <button class="popup-btn close-btn" onclick="document.getElementById('popup3').style.setProperty('display', 'none', 'important')">닫기</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 팝업 4 - 우하단 -->
+        <div class="popup popup-4" id="popup4" style="display: block !important; visibility: visible !important; opacity: 1 !important; position: absolute !important; bottom: 10% !important; right: 10% !important; max-width: 350px !important; min-width: 280px !important;">
+            <div class="popup-content">
+                <img src="img/popup4.jpg" alt="팝업 이미지 4" class="popup-image">
+                <div class="popup-buttons">
+                    <button class="popup-btn close-btn" onclick="document.getElementById('popup4').style.setProperty('display', 'none', 'important')">닫기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- 고정 플로팅 버튼 -->
     <div class="floating-buttons">
         <a href="http://pf.kakao.com/_YxlXDn" target="_blank" class="floating-btn kakao-float" title="카카오톡 문의">
             <i class="fas fa-comment"></i>
             <span class="btn-text">카톡</span>
         </a>
-        <a href="tel: 010-2048-7706" class="floating-btn phone-float" title="전화 문의">
+        <a href="tel: 1600-3070" class="floating-btn phone-float" title="전화 문의">
             <i class="fas fa-phone"></i>
             <span class="btn-text">전화</span>
         </a>
+        <!-- 팝업 테스트 버튼 (임시) -->
+        <button onclick="showPopupsNow()" title="팝업 즉시 표시" style="background-color: #ff6b6b; color: white; border: none; border-radius: 50px; padding: 15px; cursor: pointer; margin-left: 10px; font-size: 16px;">
+            팝업 표시
+        </button>
+        <!-- 모든 팝업 닫기 버튼 (임시) -->
+        <button onclick="closeAllPopups()" title="모든 팝업 닫기" style="background-color: #dc3545; color: white; border: none; border-radius: 50px; padding: 15px; cursor: pointer; margin-left: 10px; font-size: 16px;">
+            팝업 닫기
+        </button>
     </div>
 
     <script src="script.js"></script>

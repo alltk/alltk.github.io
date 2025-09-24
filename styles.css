@@ -421,7 +421,8 @@ body {
 }
 
 /* 서비스 슬라이더 */
-.awards-slider {
+/* 기존 awards-slider는 다른 용도로 사용 */
+.awards-slider:not(.awards-slider-container .awards-slider) {
     padding: 60px 0;
     background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
     position: relative;
@@ -2648,7 +2649,6 @@ body {
     .terms-content li {
         font-size: 13px;
     }
-}
 
 /* 상품안내 페이지 스타일 */
 .product-intro {
@@ -2901,6 +2901,224 @@ body {
     color: #ffd700;
 }
 
+/* 수상 이미지 슬라이드 */
+.awards-slider-container {
+    margin-top: 60px !important;
+    position: relative !important;
+    width: 100% !important;
+    max-width: 1200px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding: 30px !important;
+    background: #fff !important;
+    border-radius: 20px !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2) !important;
+    border: 3px solid #ffd700 !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    z-index: 10 !important;
+}
+
+.slider-title {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.slider-title h4 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.slider-title p {
+    font-size: 16px;
+    color: #666;
+    margin: 0;
+}
+
+/* 수상 이미지 슬라이드 - 강제로 슬라이드 작동 */
+.awards-slider-container .awards-slider {
+    max-width: 1000px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    height: 400px;
+}
+
+.awards-slider-container .award-slide {
+    display: none !important;
+    text-align: center;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.awards-slider-container .award-slide.active {
+    display: block !important;
+}
+
+.awards-slider-container .award-image {
+    max-width: 80% !important;
+    height: 350px !important;
+    object-fit: contain !important;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    display: block !important;
+    margin: 0 auto !important;
+}
+
+.simple-award-slider {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    background: #f8f9fa;
+    border-radius: 15px;
+    border: 2px solid #e9ecef;
+    overflow: hidden;
+}
+
+.award-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.award-img.active {
+    opacity: 1;
+}
+
+.award-controls {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+}
+
+.award-controls button {
+    background: #ffd700;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+    color: #333;
+    transition: all 0.3s ease;
+}
+
+.award-controls button:hover {
+    background: #ffed4e;
+    transform: scale(1.1);
+}
+
+/* 이미지 로드 실패 시 대체 스타일 */
+.award-image:not([src]),
+.award-image[src=""] {
+    background: linear-gradient(135deg, #ffd700, #ffed4e);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #333;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.award-image:not([src])::before,
+.award-image[src=""]::before {
+    content: "수상 내역 이미지";
+}
+
+/* 수상 슬라이드 컨트롤 전용 */
+.awards-slider-container .slider-controls {
+    position: absolute !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    width: 100% !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    padding: 0 20px !important;
+    pointer-events: none !important;
+    z-index: 10 !important;
+}
+
+.awards-slider-container .slider-btn {
+    background: rgba(255, 255, 255, 0.9) !important;
+    border: none !important;
+    width: 50px !important;
+    height: 50px !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    pointer-events: auto !important;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2) !important;
+}
+
+.awards-slider-container .slider-btn:hover {
+    background: #fff !important;
+    transform: scale(1.1) !important;
+}
+
+.awards-slider-container .slider-btn i {
+    font-size: 18px !important;
+    color: #333 !important;
+}
+
+.awards-slider-container .slider-dots {
+    display: flex !important;
+    justify-content: center !important;
+    gap: 10px !important;
+    margin-top: 20px !important;
+}
+
+.awards-slider-container .dot {
+    width: 12px !important;
+    height: 12px !important;
+    border-radius: 50% !important;
+    background: #ddd !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+}
+
+.awards-slider-container .dot.active {
+    background: #ffd700 !important;
+    transform: scale(1.2) !important;
+}
+
+.awards-slider-container .dot:hover {
+    background: #ffd700 !important;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .award-image {
+        height: 250px;
+    }
+    
+    .slider-btn {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .slider-btn i {
+        font-size: 14px;
+    }
+    
+    .slider-controls {
+        padding: 0 10px;
+    }
+}
+
 /* 고객 성과 섹션 */
 .client-results {
     padding: 80px 0;
@@ -3064,3 +3282,191 @@ body {
     .package-price {
         font-size: 28px;
     }
+}
+
+/* 팝업 스타일 */
+.popup-overlay {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background-color: transparent !important;
+    z-index: 99999 !important;
+    display: flex !important; /* 기본적으로 표시 */
+    justify-content: center !important;
+    align-items: center !important;
+    flex-wrap: wrap !important;
+    gap: 20px !important;
+    padding: 20px !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+.popup {
+    position: relative !important;
+    background: white !important;
+    border-radius: 12px !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
+    max-width: 350px !important;
+    width: 90% !important;
+    min-width: 280px !important;
+    animation: popupFadeIn 0.5s ease-out !important;
+    display: block !important; /* 기본적으로 표시 */
+    visibility: visible !important;
+    opacity: 1 !important;
+    z-index: 100000 !important;
+}
+
+.popup.hidden {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    z-index: -1 !important;
+}
+
+.popup-content {
+    padding: 20px;
+    text-align: center;
+}
+
+.popup-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.popup-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.popup-btn {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    min-width: 80px;
+    text-align: center;
+}
+
+.close-btn {
+    background-color: #6c757d;
+    color: white;
+}
+
+.close-btn:hover {
+    background-color: #5a6268;
+}
+
+.dont-show-btn {
+    background-color: #007bff;
+    color: white;
+}
+
+.dont-show-btn:hover {
+    background-color: #0056b3;
+}
+
+/* 팝업 위치 조정 */
+.popup-1 {
+    position: absolute !important;
+    top: 10% !important;
+    left: 10% !important;
+    display: block !important;
+    visibility: visible !important;
+}
+
+.popup-2 {
+    position: absolute !important;
+    top: 10% !important;
+    right: 10% !important;
+    display: block !important;
+    visibility: visible !important;
+}
+
+.popup-3 {
+    position: absolute !important;
+    bottom: 10% !important;
+    left: 10% !important;
+    display: block !important;
+    visibility: visible !important;
+}
+
+.popup-4 {
+    position: absolute !important;
+    bottom: 10% !important;
+    right: 10% !important;
+    display: block !important;
+    visibility: visible !important;
+}
+
+@keyframes popupFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* 모바일 반응형 */
+@media (max-width: 768px) {
+    .popup-overlay {
+        flex-direction: column;
+        justify-content: flex-start;
+        padding: 10px;
+        gap: 10px;
+    }
+    
+    .popup {
+        position: static !important;
+        max-width: 95% !important;
+        width: 95% !important;
+        margin: 0 auto !important;
+    }
+    
+    .popup-1, .popup-2, .popup-3, .popup-4 {
+        position: static !important;
+        margin-bottom: 10px !important;
+        top: auto !important;
+        left: auto !important;
+        right: auto !important;
+        bottom: auto !important;
+    }
+    
+    .popup-buttons {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .popup-btn {
+        width: 100%;
+        padding: 12px;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .popup {
+        max-width: 95%;
+    }
+    
+    .popup-content {
+        padding: 15px;
+    }
+    
+    .popup-image {
+        margin-bottom: 10px;
+    }
+}
